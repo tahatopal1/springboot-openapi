@@ -2,6 +2,8 @@ package com.lemoncode21.openapi;
 
 import com.lemoncode21.openapi.util.ReadJsonFileToJsonObject;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.examples.Example;
@@ -17,6 +19,12 @@ import java.io.IOException;
 
 @OpenAPIDefinition
 @Configuration
+@SecurityScheme(
+        name = "token",
+        type = SecuritySchemeType.HTTP,
+        bearerFormat = "JWT",
+        scheme = "bearer"
+)
 public class SpringdocConfig {
 
     @Bean
@@ -46,7 +54,7 @@ public class SpringdocConfig {
     }
 
 
-    @Bean
+/*    @Bean
     public GroupedOpenApi authenticationApi(){
         String [] paths = {"/auth/**"};
         return GroupedOpenApi.builder()
@@ -61,5 +69,5 @@ public class SpringdocConfig {
                 .group("Post")
                 .pathsToMatch(paths)
                 .build();
-    }
+    }*/
 }
